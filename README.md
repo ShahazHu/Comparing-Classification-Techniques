@@ -76,6 +76,145 @@ Figure 1 above is the boxplot for age. We can see that a majority takes place be
 
 Figure 2 above is another way and arguably a better visualization of understanding the frequency of age across the age category. 
 
+### Preprocessing the data
+Preprocessing the data begins with removing the unknown entries. We first start with removing the poutcome column. To remove the poutcome column, we can use: 
+```
+df <- select(bank, -c(poutcome)),
+```
+which takes all columns except poutcome. 
+
+Then we go through each row and remove any row that contains unknown. To do those, we can use:
+```
+df <- filter(df, across(.cols = everything(), ~ !grepl("unknown",.)))
+```
+which states that we are going to filter the data frame across all columns in every variable, depending on grep to see if unknown is not there, in the entire data frame. 
+The dataset is now removed of all known values. The new dimensions of the data frame are now 30,807 observations by 16 variables. The means and medians are the same. 
+
+### Preparing the Training and Test Datasets
+
+To prepare the training and testing data set, we start by setting the seed to ‘123’. We create an index vector which chooses 80% of the rows of our data frame. We then create two new data frames, applying 80% of the data from our original data frame, and using it as our training dataset, and setting the 20% remainder the data frame as our test dataset. 
+
+From the original data frame, which has 30,807 observations the training data set has 24,735 observations, and the testing dataset has 6,182 observations for testing the model. 
+
+## Results
+
+The following results for each classification will be presented by showing the confusion matrix, accuracy, error rate, precision, recall and f1-score. These classifications use all variables to compute the final value. We use the confusionMatrix method from RStudio’s ‘caret’ package to help compute these terms. 
+
+### CTree Classification
+The confusion matrix of CTree classification generated from RStudio’s ‘caret’ package: 
+![image](https://github.com/ShahazHu/Comparing-Classification-Techniques/assets/61039853/b4b2dfe1-f497-4276-adfc-4f4d86c6612f)
+
+The accuracy noted above is 87.84%. This is calculated as:
+((4964 + 466))/((4964 + 466 + 299 + 466))
+
+Using this value, the error rate is 1-0.8784 = 0.1216 = 12.16%
+
+Precision (pos Pred Value) = 4964/(4964+453) = 0.916374377
+Recall (sensitivity) =  4964/(4964+299)= 0.943188296
+F1_Score: (2*0.916374377*0.943188296.)/(0.916374377+ 0.943188296)= 0.929588
+
+### Logistic Regression
+![image](https://github.com/ShahazHu/Comparing-Classification-Techniques/assets/61039853/ffbc9103-4e46-463e-bfed-3da42389dcd3)
+
+The accuracy noted above is 86.78%. This is calculated using   ((5150+704))/((5150+704+113+215)). Using this value, the error rate is 1-0.8678 = 0.1322 = 13.22%
+Precision (pos Pred Value) = 5150/(5150+704)= 0.879740
+Recall (sensitivity) =  4964/(4964+299)= 0.978529
+F1_Score: (2*0.916374377*0.943188296.)/(0.916374377+ 0.943188296)= 0.926509
+
+### J48 Tree
+
+![image](https://github.com/ShahazHu/Comparing-Classification-Techniques/assets/61039853/a1c09d83-092f-4852-8ede-0ef4bb0c39f0)
+The accuracy noted above is 87.08%. This is calculated using   ((4952+431))/((4952+488+311+431)). Using this value, the error rate is 1-0.8708 = 0.1292 = 12.92%
+Precision (pos Pred Value) = 4952/(4952+488)= 0.910294
+Recall (sensitivity) =  4952/(4952+311)= 0.940908
+F1_Score: (2*0.910294*0.940908)/(0.910294 + 0.940908)= 0.925348
+
+
+### k-NN Classification
+![image](https://github.com/ShahazHu/Comparing-Classification-Techniques/assets/61039853/56a861a9-0986-49f2-87c3-4359f6c5c77d)
+The accuracy is 85.72%. This is calculated using   ((4952+431))/((4952+488+311+431)). Using this value, the error rate is 1-0.8572 = 0.1428 = 14.28%
+Precision (pos Pred Value) = 4952/(4952+488)= 0.866098.
+Recall (sensitivity) =  4952/(4952+311)= 0.984420.
+F1_Score: (2*0.910294*0.940908)/(0.910294 + 0.940908)= 0.921476.
+
+
+## Discussion on the Results
+### Classifier Comparison Based on Accuracy 
+![image](https://github.com/ShahazHu/Comparing-Classification-Techniques/assets/61039853/37ce19cd-310e-41b2-924f-c4280a6e5526)
+Ranked in order by accuracy: 
+```
+1.	CTree
+2.	J48 Tree
+3.	Logistic Regression
+4.	k-NN
+```
+Based on the graphics, the important to note that the accuracy between these classifiers may seem small. 0.8784, 0.8678, 0.8708, 0.8572, on average, having around 1% difference, but this can be significant when applied to very large datasets. 
+
+### Classifier Comparison Based on Precision
+![image](https://github.com/ShahazHu/Comparing-Classification-Techniques/assets/61039853/f54968da-9768-487f-bb33-e31c721216f2)
+We see above that the J48 classifier has the highest precision out of all the classifiers. Ranking in order, it is:
+```
+1.	CTree 
+2.	J48 Tree 
+3.	Logistical Regression
+4.	k-NN. 
+```
+The most significant percentage difference is between the top 2 versus the bottom two, having greater than 3% difference. 
+
+### Classifier Comparison Based on Recall
+![image](https://github.com/ShahazHu/Comparing-Classification-Techniques/assets/61039853/53d8df9b-7d2d-46cf-8032-1bdf174b83dc)
+Ranked in order of highest recall to lowest: 
+```
+1.	k-NN
+2.	Logistic Regression
+3.	CTree
+4.	J48 Tree
+```
+Percentage wise, there’s a significant percentage between the top two and the bottom two. Between 2) and 3), there is a ~3.5% difference, while 1) and 2) have a ~0.589% difference, 3) and 4) have a ~ 0.228 difference. 
+
+### Classifier Comparison Based on Error Rate
+![image](https://github.com/ShahazHu/Comparing-Classification-Techniques/assets/61039853/29305a12-4931-4436-95c2-3eb81497af16)
+
+
+Ranking from lowest error rate to highest, we have: 
+```
+1)	CTree
+2)	J48 Tree
+3)	Logistic Regression
+4)	k-NN
+```
+K-NN had the highest error rate, having 2.12% more errors than CTree. 
+
+### Classifier Comparison Based on F1-Score
+![image](https://github.com/ShahazHu/Comparing-Classification-Techniques/assets/61039853/75158ea0-e56c-4008-8716-7f9e81bcb228)
+
+The F1-scores were very close, ranking from highest to lowest: 
+```
+1.	CTree = 0.9295880
+2.	Logistic Regression = 0.9265090
+3.	J48 = 0.9253480
+4.	k-NN = 0.9214762
+```
+
+The percentage difference between them were ranging from ~0.1% to ~0.3% respectively. 
+To conclude, on ranking the overall classifiers, 
+```
+1.	CTree
+2.	J48 
+3.	Logistic Regression
+4.	k-NN. 
+```
+We use the F1 Score of each classifier to along with all the other comparisons, to determine which is the best. Overall, we see that CTree has performed the best.
+
+## Conclusion
+To conclude, CTree was the best classifier. This does not mean that CTree is superior in every dataset, but in this case, for the purpose of this dataset and to solve the given problem, CTree had the highest accuracy. 
+
+
+
+
+
+
+
 ## References: 
 
   [Moro et al., 2011] S. Moro, R. Laureano and P. Cortez. Using Data Mining for Bank Direct Marketing: An Application of the CRISP-DM Methodology. 
