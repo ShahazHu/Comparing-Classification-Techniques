@@ -226,7 +226,11 @@ To conclude, CTree was the best classifier. This does not mean that CTree is sup
   In P. Novais et al. (Eds.), Proceedings of the European Simulation and Modelling Conference - ESM'2011, pp. 117-121, Guimarães, Portugal, October, 2011. EUROSIS.
   Available at: [pdf] http://hdl.handle.net/1822/14838
                 [bib] http://www3.dsi.uminho.pt/pcortez/bib/2011-esm-1.txt
+  
   Information on CTrees : https://www.rdocumentation.org/packages/partykit/versions/1.2-7/topics/ctree
+  
   Information on J48L https://www.rdocumentation.org/packages/RWeka/versions/0.4-43/topics/Weka_classifier_trees
+  
   Information on Linear Modeling: https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm
-  k-NN information: https://www.rdocumentation.org/packages/class/versions/7.3-19/topics/knn
+ 
+ k-NN information: https://www.rdocumentation.org/packages/class/versions/7.3-19/topics/knn
