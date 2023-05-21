@@ -124,6 +124,7 @@ F1_Score: (2*0.916374377*0.943188296.)/(0.916374377+ 0.943188296)= 0.926509
 ### J48 Tree
 
 ![image](https://github.com/ShahazHu/Comparing-Classification-Techniques/assets/61039853/a1c09d83-092f-4852-8ede-0ef4bb0c39f0)
+
 The accuracy noted above is 87.08%. This is calculated using   ((4952+431))/((4952+488+311+431)). Using this value, the error rate is 1-0.8708 = 0.1292 = 12.92%
 Precision (pos Pred Value) = 4952/(4952+488)= 0.910294
 Recall (sensitivity) =  4952/(4952+311)= 0.940908
@@ -132,6 +133,7 @@ F1_Score: (2*0.910294*0.940908)/(0.910294 + 0.940908)= 0.925348
 
 ### k-NN Classification
 ![image](https://github.com/ShahazHu/Comparing-Classification-Techniques/assets/61039853/56a861a9-0986-49f2-87c3-4359f6c5c77d)
+
 The accuracy is 85.72%. This is calculated using   ((4952+431))/((4952+488+311+431)). Using this value, the error rate is 1-0.8572 = 0.1428 = 14.28%
 Precision (pos Pred Value) = 4952/(4952+488)= 0.866098.
 Recall (sensitivity) =  4952/(4952+311)= 0.984420.
@@ -141,6 +143,7 @@ F1_Score: (2*0.910294*0.940908)/(0.910294 + 0.940908)= 0.921476.
 ## Discussion on the Results
 ### Classifier Comparison Based on Accuracy 
 ![image](https://github.com/ShahazHu/Comparing-Classification-Techniques/assets/61039853/37ce19cd-310e-41b2-924f-c4280a6e5526)
+
 Ranked in order by accuracy: 
 ```
 1.	CTree
@@ -152,6 +155,7 @@ Based on the graphics, the important to note that the accuracy between these cla
 
 ### Classifier Comparison Based on Precision
 ![image](https://github.com/ShahazHu/Comparing-Classification-Techniques/assets/61039853/f54968da-9768-487f-bb33-e31c721216f2)
+
 We see above that the J48 classifier has the highest precision out of all the classifiers. Ranking in order, it is:
 ```
 1.	CTree 
@@ -163,6 +167,7 @@ The most significant percentage difference is between the top 2 versus the botto
 
 ### Classifier Comparison Based on Recall
 ![image](https://github.com/ShahazHu/Comparing-Classification-Techniques/assets/61039853/53d8df9b-7d2d-46cf-8032-1bdf174b83dc)
+
 Ranked in order of highest recall to lowest: 
 ```
 1.	k-NN
